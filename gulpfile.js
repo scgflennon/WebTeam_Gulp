@@ -9,6 +9,7 @@ var stylus = require('gulp-stylus'); // stylusコンパイル
 var sourcemaps = require('gulp-sourcemaps');// ソースマップ
 var webp = require('gulp-webp'); // WebP圧縮
 var spritesmith = require("gulp.spritesmith"); //スプライト
+var imagemin = require("gulp-imagemin"); //画像圧縮
 
 gulp.task("sass", function() {
 	console.log( '---------- sass task ----------' );
@@ -62,6 +63,22 @@ gulp.task('sprite', function () {
 	    }));
 	spriteData.img.pipe(gulp.dest("images"));
 	spriteData.css.pipe(gulp.dest("sass/sprite"));
+});
+
+gulp.task( 'imagemin', function(){
+	console.log( '---------- imagemin task ----------' );
+	var srcGlob = ['images/**/*.+(jpg|jpeg|png|gif|svg)', '!images/min/**/*.+(jpg|jpeg|png|gif|svg)'];
+	var dstGlob = 'images/min';
+	var imageminOptions = {
+	optimizationLevel: 7,
+	progressive: true,
+	interlaced: true
+};
+
+gulp.src( srcGlob )
+	.pipe(imagemin( imageminOptions ))
+	.pipe(gulp.dest( dstGlob ))
+	.pipe(notify({message: '画像圧縮完了', onLast: true}) );
 });
 
 gulp.task("default", function() {
