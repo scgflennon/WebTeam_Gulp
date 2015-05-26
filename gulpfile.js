@@ -7,7 +7,8 @@ var notify = require('gulp-notify'); // 通知
 var cssmin = require('gulp-cssmin'); //CSS圧縮
 var stylus = require('gulp-stylus'); // stylusコンパイル
 var sourcemaps = require('gulp-sourcemaps');// ソースマップ
-var spritesmith = require("gulp.spritesmith");
+var webp = require('gulp-webp'); // WebP圧縮
+var spritesmith = require("gulp.spritesmith"); //スプライト
 
 gulp.task("sass", function() {
 	console.log( '---------- sass task ----------' );
@@ -40,6 +41,15 @@ gulp.task("js", function() {
 	.pipe(uglify())
 	.pipe(gulp.dest("./js/min"))
 	.pipe(notify({message: 'JS 圧縮完了', onLast: true}) );
+});
+
+gulp.task('webp', function () {
+	console.log( '---------- WebP圧縮 task ----------' );
+	gulp.src(['images/**/*.png','images/**/*.jpg','images/**/*.jpeg','images/**/*.gif','images/**/*.tiff'])
+	.pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
+	.pipe(webp())
+	.pipe(gulp.dest("images/"))
+	.pipe(notify({message: 'WebP 圧縮完了', onLast: true}) );
 });
 
 gulp.task('sprite', function () {
