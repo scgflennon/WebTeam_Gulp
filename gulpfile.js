@@ -45,7 +45,7 @@ gulp.task("js", function() {
 
 gulp.task('webp', function () {
 	console.log( '---------- WebP圧縮 task ----------' );
-	gulp.src(['images/**/*.png','images/**/*.jpg','images/**/*.jpeg','images/**/*.gif','images/**/*.tiff'])
+	gulp.src('images/**/*.{png.jpg,jpeg,gif,tiff}')
 	.pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
 	.pipe(webp())
 	.pipe(gulp.dest("images/"))
@@ -68,5 +68,11 @@ gulp.task("default", function() {
 	console.log( '---------- default task ----------' );
 	gulp.watch(["js/**/*.js","!js/min/**/*.js"],["js"]);
 	gulp.watch("sass/**/*.scss",["sass"]);
+	gulp.watch("images/**/*.{png,jpg,jpeg,gif}",["webp"]);
 	//gulp.watch("stylus/**/*.styl",["stylus"]);
+});
+
+gulp.task("prod", function() {
+	console.log( '---------- prod task ----------' );
+
 });
