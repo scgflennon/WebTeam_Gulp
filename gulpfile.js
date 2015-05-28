@@ -10,6 +10,11 @@ var sourcemaps = require('gulp-sourcemaps');// ソースマップ
 var webp = require('gulp-webp'); // WebP圧縮
 var spritesmith = require("gulp.spritesmith"); //スプライト
 var imagemin = require("gulp-imagemin"); //画像圧縮
+var compass = require('gulp-compass'); // Compass
+
+
+var $sass_mode = "1"; //0はcompass 1だとnode-sass
+
 
 gulp.task("sass", function() {
 	console.log( '---------- sass task ----------' );
@@ -70,21 +75,41 @@ gulp.task( 'imagemin', function(){
 	var srcGlob = ['images/**/*.+(jpg|jpeg|png|gif|svg)', '!images/min/**/*.+(jpg|jpeg|png|gif|svg)'];
 	var dstGlob = 'images/min';
 	var imageminOptions = {
-	optimizationLevel: 7,
-	progressive: true,
-	interlaced: true
-};
+		optimizationLevel: 7,
+		progressive: true,
+		interlaced: true
+	};
 
-gulp.src( srcGlob )
-	.pipe(imagemin( imageminOptions ))
-	.pipe(gulp.dest( dstGlob ))
-	.pipe(notify({message: '画像圧縮完了', onLast: true}) );
+	gulp.src( srcGlob )
+		.pipe(imagemin( imageminOptions ))
+		.pipe(gulp.dest( dstGlob ))
+		.pipe(notify({message: '画像圧縮完了', onLast: true})
+		);
+});
+
+gulp.task('compass', function() {
+	console.log( '---------- Compass task ----------' );
+	gulp.src('./sass/**/*.scss')
+	.pipe(compass({
+		config_file: './config.rb',
+		css: 'css',
+		sass: 'sass'
+	}))
+	.pipe(gulp.dest('css'))
+	.pipe(notify({message: 'Compass 完了', onLast: true}) );
 });
 
 gulp.task("default", function() {
 	console.log( '---------- default task ----------' );
 	gulp.watch(["js/**/*.js","!js/min/**/*.js"],["js"]);
-	gulp.watch("sass/**/*.scss",["sass"]);
+
+	if ($sass_mode == 0){
+		console.log( '---------- Compass Watch task ----------' );
+		gulp.watch("sass/**/*.scss",["compass"]); // ruby-sass
+	} else {
+		console.log( '---------- Sass Watch task ----------' );
+		gulp.watch("sass/**/*.scss",["sass"]); // node-sass
+	}
 	gulp.watch("images/**/*.{png,jpg,jpeg,gif}",["webp"]);
 	//gulp.watch("stylus/**/*.styl",["stylus"]);
 });
