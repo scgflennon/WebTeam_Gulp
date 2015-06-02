@@ -146,6 +146,19 @@ gulp.task("default", function() {
 
 	gulp.watch("images/**/*.{png,jpg,jpeg,gif}", {interval: 1000} ,["webp"]);
 
+
+//Sprite
+gulp.watch(config.path.sprite+'/**/*.png', function(arg){
+	var filePath = arg.path.match(/^(.+\/)(.+?)(\/.+?\..+?)$/);
+	var spriteData = gulp.src(filePath[1]+filePath[2]+'/*.png')
+	.pipe(plumber())
+	.pipe(spritesmith({
+		imgName: filePath[2]+'.png',
+		cssName: filePath[2]+'.scss'
+	}));
+	spriteData.img.pipe(gulp.dest(config.path.image));
+	spriteData.css.pipe(gulp.dest(config.path.sass));
+	});
 });
 
 gulp.task("prod", function() {
