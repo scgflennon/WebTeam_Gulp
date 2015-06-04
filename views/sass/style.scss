@@ -4,7 +4,7 @@
 h1 {
     color: red;
 
-    transition: 200ms ease-out transform;
+    transition: 2000ms ease-out transform;
     &:hover {
         color: yellow;
         transform: translate(10px,0);
@@ -12,6 +12,6 @@ h1 {
 }
 
 h2 {
-	@include transition(200ms ease-out transform);
+	@include transition(2000ms ease-out transform);
 	@include transform(translate(10px,0));
 }

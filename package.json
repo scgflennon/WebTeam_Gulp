@@ -1,7 +1,6 @@
 {
-  "name": "GulpTest",
+  "name": "gulptest",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.8.11",
+    "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.0",
     "gulp-cached": "^1.1.0",
     "gulp-compass": "^2.1.0",
@@ -29,5 +28,14 @@
   },
   "dependencies": {
     "node-notifier": "^4.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scgflennon/WebTeam_Gulp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/scgflennon/WebTeam_Gulp/issues"
+  },
+  "homepage": "https://github.com/scgflennon/WebTeam_Gulp#readme",
+  "description": ""
 }

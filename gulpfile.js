@@ -26,14 +26,30 @@ config = {
 		"css"			: root+"/css",
 		"js"			: root+"/js",
 		"images"	: root+"/images",
-		"sprite"  : root+"/images/sprite"
+		"sprite"  : root+"/SpriteMaterial"
 	}
 }
+
+gulp.task("test", function(){
+	console.log( '-------------------------------' );
+	console.log( '           Gulp Test           ' );
+	console.log( '-------------------------------' );
+	console.in('SassMode : '+ $sass_mode + ' [Compass(0), node-sass(1), stylus(2)]');
+	console.log( '-----------Path Test-----------' );
+	console.log("Views : " + config.path.views);
+	console.log("Sass : " + config.path.sass);
+	console.log("Stylus : " + config.path.stylus);
+	console.log("Css : " + config.path.css);
+	console.log("JS : " + config.path.js);
+	console.log("images : " + config.path.images);
+	console.log("sprite : " + config.path.sprite);
+	console.log( '-------------------------------' );
+});
 
 
 gulp.task("sass", function() {
 	console.log( '---------- sass task ----------' );
-	gulp.src(config.path.sass+"/**/*scss")
+	gulp.src(config.path.sass+"/**/*.scss")
 	.pipe(cached())
 	.pipe(using())
 	.pipe(plumberWithNotify())
@@ -131,20 +147,20 @@ gulp.task('compass', function() {
 
 gulp.task("default", function() {
 	console.log( '---------- default task ----------' );
-	gulp.watch(["js/**/*.js","!js/min/**/*.js"], {interval: 1000}, ["js"]);
+	gulp.watch([config.path.js,"!"+config.path.js+"/min/**/*.js"], {interval: 1000}, ["js"]);
 
 	if ($sass_mode == "0"){
 		console.log( '---------- Compass Watch task ----------' );
-		gulp.watch("sass/**/*.scss", {interval: 500},["compass"]); // ruby-sass
+		gulp.watch(config.path.sass+"/**/*.scss", {interval: 500},["compass"]); // ruby-sass
 	} else if ($sass_mode == "1") {
 		console.log( '---------- Sass Watch task ----------' );
-		gulp.watch("sass/**/*.scss", {interval: 500},["sass"]); // node-sass
+		gulp.watch(config.path.sass+"/**/*.scss", {interval: 500},["sass"]); // node-sass
 	} else if ($sass_mode == "2"){
 		console.log( '---------- stylus Watch task ----------' );
-		gulp.watch("stylus/**/*.styl", {interval: 500},["stylus"]); // Sassでは無くStylusを使う場合
+		gulp.watch(config.path.stylus+'/**/*.styl', {interval: 500},["stylus"]); // Sassでは無くStylusを使う場合
 	}
 
-	gulp.watch("images/**/*.{png,jpg,jpeg,gif}", {interval: 1000} ,["webp"]);
+	//gulp.watch(config.path.images+"/**/*.{png,jpg,jpeg,gif}", {interval: 1000} ,["webp"]);
 
 
 //Sprite
@@ -154,10 +170,10 @@ gulp.watch(config.path.sprite+'/**/*.png', function(arg){
 	.pipe(plumber())
 	.pipe(spritesmith({
 		imgName: filePath[2]+'.png',
-		cssName: filePath[2]+'.scss'
+		cssName: '_'+filePath[2]+'.scss'
 	}));
-	spriteData.img.pipe(gulp.dest(config.path.image));
-	spriteData.css.pipe(gulp.dest(config.path.sass));
+	spriteData.img.pipe(gulp.dest(config.path.images+'/sprite/'));
+	spriteData.css.pipe(gulp.dest(config.path.sass+'/sprite/'));
 	});
 });
 

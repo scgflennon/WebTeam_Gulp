@@ -1,0 +1,147 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+$-0001-zerply-name: '_0001_Zerply';
+$-0001-zerply-x: 0px;
+$-0001-zerply-y: 0px;
+$-0001-zerply-offset-x: 0px;
+$-0001-zerply-offset-y: 0px;
+$-0001-zerply-width: 48px;
+$-0001-zerply-height: 48px;
+$-0001-zerply-total-width: 144px;
+$-0001-zerply-total-height: 144px;
+$-0001-zerply-image: 'test.png';
+$-0001-zerply: (0px, 0px, 0px, 0px, 48px, 48px, 144px, 144px, 'test.png', '_0001_Zerply', );
+$-0002-skype-name: '_0002_Skype';
+$-0002-skype-x: 48px;
+$-0002-skype-y: 0px;
+$-0002-skype-offset-x: -48px;
+$-0002-skype-offset-y: 0px;
+$-0002-skype-width: 48px;
+$-0002-skype-height: 48px;
+$-0002-skype-total-width: 144px;
+$-0002-skype-total-height: 144px;
+$-0002-skype-image: 'test.png';
+$-0002-skype: (48px, 0px, -48px, 0px, 48px, 48px, 144px, 144px, 'test.png', '_0002_Skype', );
+$-0005-blogger-name: '_0005_Blogger';
+$-0005-blogger-x: 0px;
+$-0005-blogger-y: 48px;
+$-0005-blogger-offset-x: 0px;
+$-0005-blogger-offset-y: -48px;
+$-0005-blogger-width: 48px;
+$-0005-blogger-height: 48px;
+$-0005-blogger-total-width: 144px;
+$-0005-blogger-total-height: 144px;
+$-0005-blogger-image: 'test.png';
+$-0005-blogger: (0px, 48px, 0px, -48px, 48px, 48px, 144px, 144px, 'test.png', '_0005_Blogger', );
+$-0011-yelp-name: '_0011_Yelp';
+$-0011-yelp-x: 48px;
+$-0011-yelp-y: 48px;
+$-0011-yelp-offset-x: -48px;
+$-0011-yelp-offset-y: -48px;
+$-0011-yelp-width: 48px;
+$-0011-yelp-height: 48px;
+$-0011-yelp-total-width: 144px;
+$-0011-yelp-total-height: 144px;
+$-0011-yelp-image: 'test.png';
+$-0011-yelp: (48px, 48px, -48px, -48px, 48px, 48px, 144px, 144px, 'test.png', '_0011_Yelp', );
+$-0023-mobile-me-name: '_0023_MobileMe';
+$-0023-mobile-me-x: 96px;
+$-0023-mobile-me-y: 0px;
+$-0023-mobile-me-offset-x: -96px;
+$-0023-mobile-me-offset-y: 0px;
+$-0023-mobile-me-width: 48px;
+$-0023-mobile-me-height: 48px;
+$-0023-mobile-me-total-width: 144px;
+$-0023-mobile-me-total-height: 144px;
+$-0023-mobile-me-image: 'test.png';
+$-0023-mobile-me: (96px, 0px, -96px, 0px, 48px, 48px, 144px, 144px, 'test.png', '_0023_MobileMe', );
+$-0026-a-i-m-name: '_0026_AIM';
+$-0026-a-i-m-x: 96px;
+$-0026-a-i-m-y: 48px;
+$-0026-a-i-m-offset-x: -96px;
+$-0026-a-i-m-offset-y: -48px;
+$-0026-a-i-m-width: 48px;
+$-0026-a-i-m-height: 48px;
+$-0026-a-i-m-total-width: 144px;
+$-0026-a-i-m-total-height: 144px;
+$-0026-a-i-m-image: 'test.png';
+$-0026-a-i-m: (96px, 48px, -96px, -48px, 48px, 48px, 144px, 144px, 'test.png', '_0026_AIM', );
+$-0034-i-like-name: '_0034_iLike';
+$-0034-i-like-x: 0px;
+$-0034-i-like-y: 96px;
+$-0034-i-like-offset-x: 0px;
+$-0034-i-like-offset-y: -96px;
+$-0034-i-like-width: 48px;
+$-0034-i-like-height: 48px;
+$-0034-i-like-total-width: 144px;
+$-0034-i-like-total-height: 144px;
+$-0034-i-like-image: 'test.png';
+$-0034-i-like: (0px, 96px, 0px, -96px, 48px, 48px, 144px, 144px, 'test.png', '_0034_iLike', );
+$spritesheet-width: 144px;
+$spritesheet-height: 144px;
+$spritesheet-image: 'test.png';
+$spritesheet-sprites: ($-0001-zerply, $-0002-skype, $-0005-blogger, $-0011-yelp, $-0023-mobile-me, $-0026-a-i-m, $-0034-i-like, );
+$spritesheet: (144px, 144px, 'test.png', $spritesheet-sprites, );
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}
