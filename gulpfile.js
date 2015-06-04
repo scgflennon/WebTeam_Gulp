@@ -160,7 +160,7 @@ gulp.task("default", function() {
 		gulp.watch(config.path.stylus+'/**/*.styl', {interval: 500},["stylus"]); // Sassでは無くStylusを使う場合
 	}
 
-	//gulp.watch(config.path.images+"/**/*.{png,jpg,jpeg,gif}", {interval: 1000} ,["webp"]);
+	gulp.watch(config.path.images+"/**/*.{png,jpg,jpeg,gif}", {interval: 1000} ,["webp"]);
 
 
 //Sprite
